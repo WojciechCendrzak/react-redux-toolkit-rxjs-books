@@ -1,0 +1,21 @@
+button {
+  border-radius: var(--border-radius);
+  border: var(--secondary) solid thin;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button-primary {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+}
+
+.button-secondary {
+  background-color: var(--secondary);
+}
+
+.button-transparent {
+  background-color: transparent;
+}

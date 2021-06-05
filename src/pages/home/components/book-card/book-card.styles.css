@@ -1,0 +1,28 @@
+.note-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  padding-top: 0;
+  background-color: var(--secondary);
+}
+
+.note-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 2rem;
+  height: 58px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-card-date {
+  margin-top: 1rem;
+}
+
+.note-card-button-container {
+  align-items: center;
+  display: flex;
+}
