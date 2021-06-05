@@ -1,12 +1,8 @@
-import {
-  ChangeEventHandler,
-  KeyboardEventHandler,
-  useCallback,
-  useState,
-} from 'react';
-import { useDispatch } from 'react-redux';
+import { ChangeEventHandler, KeyboardEventHandler, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Button, ButtonType } from '../../../../components/button/button';
+import { getSearchPhrase } from '../../../../logic/store/book/book.selector';
 import { bookSlice } from '../../../../logic/store/book/book.slice';
 import { colors } from '../../../../styles/colors';
 import {
@@ -17,17 +13,19 @@ import {
 
 export const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
-  const [searchPhrase, setSearchPhrase] = useState('');
+  const searchPhrase = useSelector(getSearchPhrase);
 
   const handleSearch = useCallback(() => {
-    dispatch(bookSlice.actions.fetchBooks({ searchPhrase }));
-  }, [dispatch, searchPhrase]);
+    dispatch(bookSlice.actions.fetchBooks());
+  }, [dispatch]);
 
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       const newSearchPhrase = e.target.value;
-      setSearchPhrase(newSearchPhrase);
-      dispatch(bookSlice.actions.fetchBooks({ searchPhrase: newSearchPhrase }));
+      dispatch(
+        bookSlice.actions.setSearchPhrase({ searchPhrase: newSearchPhrase })
+      );
+      dispatch(bookSlice.actions.fetchBooks());
     },
     [dispatch]
   );

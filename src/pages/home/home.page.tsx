@@ -9,7 +9,7 @@ export const HomePage: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(bookSlice.actions.fetchBooks({ searchPhrase: 'RxJs' }));
+    dispatch(bookSlice.actions.fetchBooks());
   }, [dispatch]);
 
   return (

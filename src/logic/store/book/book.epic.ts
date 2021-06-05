@@ -1,17 +1,18 @@
 import { combineEpics } from 'redux-observable';
 import { from } from 'rxjs';
-import { filter, map, switchMap, throttleTime } from 'rxjs/operators';
+import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 import { RootEpic } from '../../../app/app.epics.type';
 import { AVOID_QUICK_MULTIPLY_API_CALLS_TIMEOUT_MS } from '../../const';
 import { managed } from '../../operators/managed.operator';
 import { bookApi } from './book.api';
+import { getSearchPhrase } from './book.selector';
 import { bookSlice } from './book.slice';
 
-const fetchBooks$: RootEpic = (action$) =>
+const fetchBooks$: RootEpic = (action$, state$) =>
   action$.pipe(
     filter(bookSlice.actions.fetchBooks.match),
-    throttleTime(AVOID_QUICK_MULTIPLY_API_CALLS_TIMEOUT_MS),
-    map((action) => action.payload.searchPhrase),
+    debounceTime(AVOID_QUICK_MULTIPLY_API_CALLS_TIMEOUT_MS),
+    map(() => getSearchPhrase(state$.value)),
     managed(
       switchMap((searchPhrase) => from(bookApi.fetchBooks(searchPhrase)))
     ),
