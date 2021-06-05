@@ -30,6 +30,7 @@ const ButtonInternal = styled.div<{ type: ButtonType }>`
   cursor: pointer;
   display: flex;
   align-items: center;
+  width: min-content;
 `;
 
 const backgroundColor = {

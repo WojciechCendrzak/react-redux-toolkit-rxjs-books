@@ -1,18 +1,24 @@
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { getBookCards } from '../../../../logic/store/book/book.selector';
+import { translate, translationKeys } from '../../../../logic/translations/translation.service';
 import { BookCard } from '../book-card/book-card';
-
-import './book-cards.styles.css';
 
 export const BookCards: React.FC = () => {
   const bookCards = useSelector(getBookCards);
 
   return (
-    <div className="notes-cards">
-      <div className="title">Search results</div>
+    <>
+      <Title>{translate(translationKeys.common.searchForm.title)}</Title>
       {bookCards?.map((bookCard, index) => (
         <BookCard key={index} book={bookCard} />
       ))}
-    </div>
+    </>
   );
 };
+
+const Title = styled.div`
+  font-size: 20px;
+  text-align: center;
+  margin: 2rem;
+`;
