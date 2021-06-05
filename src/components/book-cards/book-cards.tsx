@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getBookCards } from '../../../../logic/store/book/book.selector';
-import { translate, translationKeys } from '../../../../logic/translations/translation.service';
+import { getBookCards } from '../../logic/store/book/book.selector';
+import { translate, translationKeys } from '../../logic/translations/translation.service';
 import { BookCard } from '../book-card/book-card';
 
 export const BookCards: React.FC = () => {
@@ -11,7 +11,7 @@ export const BookCards: React.FC = () => {
     <>
       <Title>{translate(translationKeys.common.searchForm.title)}</Title>
       {bookCards?.map((bookCard, index) => (
-        <BookCard key={index} book={bookCard} />
+        <BookCard key={index} book={bookCard} navigateToDetailsButton />
       ))}
     </>
   );

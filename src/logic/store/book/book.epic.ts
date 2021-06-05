@@ -16,12 +16,12 @@ const fetchBooks$: RootEpic = (action$) =>
     map((result) => bookSlice.actions.setBooks({ books: result.books }))
   );
 
-const fetchNote$: RootEpic = (action$) =>
+const fetchBook$: RootEpic = (action$) =>
   action$.pipe(
     filter(bookSlice.actions.fetchBook.match),
     map(action => action.payload.isbn13),
     managed(switchMap((isbn13) => from(bookApi.fetchBook(isbn13)))),
-    map((book) => bookSlice.actions.setBook({ book }))
+    map((bookDetails) => bookSlice.actions.setBook({  bookDetails }))
   );
 
-export const bookEpic$ = combineEpics(fetchBooks$, fetchNote$);
+export const bookEpic$ = combineEpics(fetchBooks$, fetchBook$);

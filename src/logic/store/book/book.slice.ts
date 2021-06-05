@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Book } from './book.models';
+import { Book, BookDetails } from './book.models';
 import { ObjectByKey } from '../../object';
 
 export interface BookState {
   books?: Book[];
-  bookById?: ObjectByKey<Book>;
+  bookById?: ObjectByKey<BookDetails>;
 }
 
 const initialState: BookState = {};
@@ -18,11 +18,11 @@ export const bookSlice = createSlice({
     setBooks: (state, action: PayloadAction<{ books: Book[] }>) => {
       state.books = action.payload.books;
     },
-    setBook: (state, action: PayloadAction<{ book: Book }>) => {
-      const { book } = action.payload;
+    setBook: (state, action: PayloadAction<{ bookDetails: BookDetails }>) => {
+      const { bookDetails } = action.payload;
       if (!state.bookById) state.bookById = {};
-      if (book.isbn13) {
-        state.bookById[book.isbn13] = book;
+      if (bookDetails.isbn13) {
+        state.bookById[bookDetails.isbn13] = bookDetails;
       }
     },
   },
