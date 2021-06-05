@@ -1,5 +1,12 @@
 import { Action, combineReducers } from '@reduxjs/toolkit';
-import { applyMiddleware, compose, createStore, Middleware, Store, StoreEnhancer } from 'redux';
+import {
+  applyMiddleware,
+  compose,
+  createStore,
+  Middleware,
+  Store,
+  StoreEnhancer,
+} from 'redux';
 import * as reduxLogger from 'redux-logger';
 import { createEpicMiddleware } from 'redux-observable';
 import { isProduction } from '../logic/environment';
@@ -17,8 +24,12 @@ if (isProduction()) {
 } else {
   const logger: Middleware = reduxLogger.createLogger({ collapsed: true });
   middlewares.push(logger);
-  const reduxDevToolsExtensionCompose = (window as unknown as WindowWithDevTools).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-  const composeEnhancers = reduxDevToolsExtensionCompose ? reduxDevToolsExtensionCompose({}) : compose;
+  const reduxDevToolsExtensionCompose = (
+    window as unknown as WindowWithDevTools
+  ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+  const composeEnhancers = reduxDevToolsExtensionCompose
+    ? reduxDevToolsExtensionCompose({})
+    : compose;
   enhancer = composeEnhancers(applyMiddleware(...middlewares));
 }
 

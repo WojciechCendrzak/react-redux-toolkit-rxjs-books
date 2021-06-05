@@ -1,10 +1,19 @@
-import { ChangeEventHandler, KeyboardEventHandler, useCallback, useState } from 'react';
+import {
+  ChangeEventHandler,
+  KeyboardEventHandler,
+  useCallback,
+  useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Button, ButtonType } from '../../../../components/button/button';
 import { bookSlice } from '../../../../logic/store/book/book.slice';
 import { colors } from '../../../../styles/colors';
-import { APP_BORDER_RADIUS, APP_MARGIN, APP_PADDING } from '../../../../styles/layout';
+import {
+  APP_BORDER_RADIUS,
+  APP_MARGIN,
+  APP_PADDING,
+} from '../../../../styles/layout';
 
 export const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -23,7 +32,10 @@ export const SearchForm: React.FC = () => {
     [dispatch]
   );
 
-  const handleKeyDown: KeyboardEventHandler = useCallback((e) => e.key === 'Enter' && handleSearch(), [handleSearch]);
+  const handleKeyDown: KeyboardEventHandler = useCallback(
+    (e) => e.key === 'Enter' && handleSearch(),
+    [handleSearch]
+  );
 
   return (
     <Container>
@@ -34,7 +46,11 @@ export const SearchForm: React.FC = () => {
         onChange={handleOnChange}
         onKeyDown={handleKeyDown}
       />
-      <SearchButton title="Search" type={ButtonType.Transparent} onClick={handleSearch} />
+      <SearchButton
+        title="Search"
+        type={ButtonType.Transparent}
+        onClick={handleSearch}
+      />
     </Container>
   );
 };

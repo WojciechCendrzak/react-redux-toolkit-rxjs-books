@@ -7,7 +7,10 @@ import { Button, ButtonType } from '../../components/button/button';
 import { Layout } from '../../components/layout/layout';
 import { navigateBack } from '../../logic/navigation';
 import { BookCard } from '../../components/book-card/book-card';
-import { translate, translationKeys } from '../../logic/translations/translation.service';
+import {
+  translate,
+  translationKeys,
+} from '../../logic/translations/translation.service';
 import styled from 'styled-components';
 
 export const BookPage: React.FC = () => {

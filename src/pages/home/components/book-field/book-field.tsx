@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const BookField: React.FC<{ field: string; value: string | undefined }> = ({ field, value = '' }) => (
-  <Container>
-    <Field>{`${field}:`}</Field>
-    <Value>{value}</Value>
-  </Container>
-);
+export const BookField: React.FC<{ field: string; value: string | undefined }> =
+  ({ field, value = '' }) => (
+    <Container>
+      <Field>{`${field}:`}</Field>
+      <Value>{value}</Value>
+    </Container>
+  );
 
 const Container = styled.div`
   display: flex;

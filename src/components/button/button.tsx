@@ -14,7 +14,12 @@ export enum ButtonType {
   Transparent,
 }
 
-export const Button: React.FC<ButtonProps> = ({ title, onClick, type = ButtonType.Primary, ...rest }) => (
+export const Button: React.FC<ButtonProps> = ({
+  title,
+  onClick,
+  type = ButtonType.Primary,
+  ...rest
+}) => (
   <ButtonInternal onClick={onClick} type={type} {...rest}>
     {title}
   </ButtonInternal>

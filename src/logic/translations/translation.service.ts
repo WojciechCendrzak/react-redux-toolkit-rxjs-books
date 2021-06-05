@@ -11,6 +11,7 @@ i18next.init({
   },
 });
 
-export const translate = (key: string, options?: TOptions<StringMap>) => i18next.t(key, options);
+export const translate = (key: string, options?: TOptions<StringMap>) =>
+  i18next.t(key, options);
 
 export const translationKeys = getTranslationKeys(en);

@@ -13,8 +13,10 @@ export const bookSlice = createSlice({
   name: 'book',
   initialState,
   reducers: {
-    fetchBooks: (_state, _action: PayloadAction<{ searchPhrase: string }>) => undefined,
-    fetchBook: (_state, _action: PayloadAction<{ isbn13: string }>) => undefined,
+    fetchBooks: (_state, _action: PayloadAction<{ searchPhrase: string }>) =>
+      undefined,
+    fetchBook: (_state, _action: PayloadAction<{ isbn13: string }>) =>
+      undefined,
     setBooks: (state, action: PayloadAction<{ books: Book[] }>) => {
       state.books = action.payload.books;
     },

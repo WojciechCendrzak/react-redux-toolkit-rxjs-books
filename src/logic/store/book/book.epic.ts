@@ -12,16 +12,18 @@ const fetchBooks$: RootEpic = (action$) =>
     filter(bookSlice.actions.fetchBooks.match),
     throttleTime(AVOID_QUICK_MULTIPLY_API_CALLS_TIMEOUT_MS),
     map((action) => action.payload.searchPhrase),
-    managed(switchMap((searchPhrase) => from(bookApi.fetchBooks(searchPhrase)))),
+    managed(
+      switchMap((searchPhrase) => from(bookApi.fetchBooks(searchPhrase)))
+    ),
     map((result) => bookSlice.actions.setBooks({ books: result.books }))
   );
 
 const fetchBook$: RootEpic = (action$) =>
   action$.pipe(
     filter(bookSlice.actions.fetchBook.match),
-    map(action => action.payload.isbn13),
+    map((action) => action.payload.isbn13),
     managed(switchMap((isbn13) => from(bookApi.fetchBook(isbn13)))),
-    map((bookDetails) => bookSlice.actions.setBook({  bookDetails }))
+    map((bookDetails) => bookSlice.actions.setBook({ bookDetails }))
   );
 
 export const bookEpic$ = combineEpics(fetchBooks$, fetchBook$);
