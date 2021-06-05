@@ -1,4 +1,7 @@
-import './button.styles.css';
+import styled from 'styled-components';
+import { colors } from '../../styles/colors';
+import { APP_BORDER_RADIUS } from '../../styles/layout';
+
 interface ButtonProps {
   title: string;
   type?: ButtonType;
@@ -11,18 +14,38 @@ export enum ButtonType {
   Transparent,
 }
 
-export const Button: React.FC<ButtonProps> = ({ title, onClick, type = ButtonType.Primary }) => {
-  const className = buttonClass[type];
+export const Button: React.FC<ButtonProps> = ({ title, onClick, type = ButtonType.Primary, ...rest }) => (
+  <ButtonInternal onClick={onClick} type={type} {...rest}>
+    {title}
+  </ButtonInternal>
+);
 
-  return (
-    <button className={className} onClick={onClick}>
-      {title}
-    </button>
-  );
+const ButtonInternal = styled.div<{ type: ButtonType }>`
+  border-radius: ${APP_BORDER_RADIUS};
+  border: ${({ type }) => borderColor[type]} solid thin;
+  background-color: ${({ type }) => backgroundColor[type]};
+  color: ${({ type }) => textColor[type]};
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
+
+const backgroundColor = {
+  [ButtonType.Primary]: colors.primary,
+  [ButtonType.Secondary]: colors.secondary,
+  [ButtonType.Transparent]: 'transparent',
 };
 
-const buttonClass = {
-  [ButtonType.Primary]: 'button-primary',
-  [ButtonType.Secondary]: 'button-secondary',
-  [ButtonType.Transparent]: 'button-transparent',
+const borderColor = {
+  [ButtonType.Primary]: colors.primary,
+  [ButtonType.Secondary]: colors.secondary,
+  [ButtonType.Transparent]: colors.secondary,
+};
+
+const textColor = {
+  [ButtonType.Primary]: colors.white,
+  [ButtonType.Secondary]: colors.black,
+  [ButtonType.Transparent]: colors.black,
 };

@@ -1,32 +1,40 @@
-import { useCallback, useState } from 'react';
+import { ChangeEventHandler, KeyboardEventHandler, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Button, ButtonType } from '../../../../components/button/button';
 import { bookSlice } from '../../../../logic/store/book/book.slice';
-import { APP_MARGIN } from '../../../../styles/layout';
-
-import './book-form.styles.css';
+import { colors } from '../../../../styles/colors';
+import { APP_BORDER_RADIUS, APP_MARGIN, APP_PADDING } from '../../../../styles/layout';
 
 export const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
   const [searchPhrase, setSearchPhrase] = useState('');
-  const handleOnChange = useCallback((e) => setSearchPhrase(e.target.value), []);
-  const handleAddNote = useCallback(() => {
+
+  const handleSearch = useCallback(() => {
     dispatch(bookSlice.actions.fetchBooks({ searchPhrase }));
   }, [dispatch, searchPhrase]);
 
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      const newSearchPhrase = e.target.value;
+      setSearchPhrase(newSearchPhrase);
+      dispatch(bookSlice.actions.fetchBooks({ searchPhrase: newSearchPhrase }));
+    },
+    [dispatch]
+  );
+
+  const handleKeyDown: KeyboardEventHandler = useCallback((e) => e.key === 'Enter' && handleSearch(), [handleSearch]);
+
   return (
     <Container>
-      <input
-        className="note-input"
+      <Input
         type="text"
         placeholder="Search books by title, author, ISBN or keywords..."
         value={searchPhrase}
         onChange={handleOnChange}
+        onKeyDown={handleKeyDown}
       />
-      <div className="add-button-container">
-        <Button title="Search" type={ButtonType.Transparent} onClick={handleAddNote}></Button>
-      </div>
+      <SearchButton title="Search" type={ButtonType.Transparent} onClick={handleSearch} />
     </Container>
   );
 };
@@ -34,5 +42,18 @@ export const SearchForm: React.FC = () => {
 const Container = styled.div`
   margin-bottom: ${APP_MARGIN};
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin-top: 5px;
+  margin-bottom: ${APP_MARGIN};
+`;
+
+const Input = styled.input`
+  flex: 1;
+  padding: ${APP_PADDING};
+  border-radius: ${APP_BORDER_RADIUS};
+  border: ${colors.secondary} solid thin;
+`;
+
+const SearchButton = styled(Button)`
+  margin-left: ${APP_MARGIN};
 `;

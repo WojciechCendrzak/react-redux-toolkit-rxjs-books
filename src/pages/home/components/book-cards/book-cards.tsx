@@ -4,7 +4,7 @@ import { BookCard } from '../book-card/book-card';
 
 import './book-cards.styles.css';
 
-export const NoteCards: React.FC = () => {
+export const BookCards: React.FC = () => {
   const bookCards = useSelector(getBookCards);
 
   return (
