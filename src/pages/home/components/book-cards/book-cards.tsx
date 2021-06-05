@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
-import { getBooks } from '../../../../logic/store/book/book.selector';
+import { getBookCards } from '../../../../logic/store/book/book.selector';
 import { BookCard } from '../book-card/book-card';
 
 import './book-cards.styles.css';
 
 export const NoteCards: React.FC = () => {
-  const books = useSelector(getBooks);
+  const bookCards = useSelector(getBookCards);
 
   return (
     <div className="notes-cards">
       <div className="title">Search results</div>
-      {books.map((book, index) => (
-        <BookCard key={index} book={book} />
+      {bookCards?.map((bookCard, index) => (
+        <BookCard key={index} book={bookCard} />
       ))}
     </div>
   );

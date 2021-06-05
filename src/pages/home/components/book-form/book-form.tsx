@@ -18,7 +18,7 @@ export const BookForm: React.FC = () => {
       <input
         className="note-input"
         type="text"
-        placeholder="type search phrase..."
+        placeholder="Search books by title, author, ISBN or keywords..."
         value={searchPhrase}
         onChange={handleOnChange}
       />

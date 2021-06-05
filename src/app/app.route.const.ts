@@ -1,5 +1,5 @@
 export enum AppRoute {
   Home = '/',
-  Book = '/book/:id',
+  Book = '/book/:isbn13',
   NotFound = '/not-found',
 }

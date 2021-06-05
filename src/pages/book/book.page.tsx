@@ -11,15 +11,15 @@ import './book.styles.css';
 
 export const BookPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { id } =
+  const { isbn13 } =
     useParams<{
-      id: string;
+      isbn13: string;
     }>();
-  const book = useSelector(getBook(id));
+  const book = useSelector(getBook(isbn13));
 
   useEffect(() => {
-    dispatch(bookSlice.actions.fetchBook({ id }));
-  }, [dispatch, id]);
+    dispatch(bookSlice.actions.fetchBook({ isbn13 }));
+  }, [dispatch, isbn13]);
 
   const handleBack = useCallback(() => navigateBack(), []);
 
@@ -29,7 +29,7 @@ export const BookPage: React.FC = () => {
         <div className="note-buttons">
           <Button title="Back" type={ButtonType.Secondary} onClick={handleBack} />
         </div>
-        <div className="note-content">{book.content || ''}</div>
+        <div className="note-content">{book.title || ''}</div>
       </div>
     </Layout>
   ) : null;

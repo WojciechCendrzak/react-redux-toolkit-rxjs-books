@@ -8,6 +8,7 @@ export const managed: Managed = (operator) =>
     of(action).pipe(
       operator,
       catchError((error: Error) => {
+        console.log(error);
         alert(error.message);
         return EMPTY;
       })
