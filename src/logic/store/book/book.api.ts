@@ -1,7 +1,6 @@
-import { getEnv } from '../../environment';
 import { BookDetails, BookSearchResult } from './book.models';
 
-const bookUrl = getEnv().REACT_APP_IT_BOOK_STORE_API || '';
+const bookUrl = '/1.0';
 
 export const bookApi = {
   fetchBooks: async (searchPhrase: string): Promise<BookSearchResult> =>

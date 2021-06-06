@@ -41,7 +41,6 @@
     "prettier": "^2.3.0",
     "react-app-rewired": "^2.1.8"
   },
-  "proxy": "https://api.itbook.store/1.0",
   "eslintConfig": {
     "extends": [
       "react-app",
